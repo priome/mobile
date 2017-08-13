@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Priome</string>
+    <string name="facebook_app_id">1729847677043382</string>
+    <string name="fb_login_protocol_scheme">fb1729847677043382</string>
 </resources>

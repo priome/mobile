@@ -2,6 +2,8 @@ package com.priome;
 
 import android.app.Application;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
 import com.facebook.react.ReactApplication;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -16,6 +18,13 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
+  // As per: https://github.com/facebook/react-native-fbsdk
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
+
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -26,7 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FBSDKPackage(),
+            new FBSDKPackage(mCallbackManager),
             new VectorIconsPackage(),
             new RNDeviceInfo()
       );
@@ -41,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    FacebookSdk.sdkInitialize(getApplicationContext());
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
