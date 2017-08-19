@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { autoRehydrate } from 'redux-persist';
 import { reactReduxFirebase } from 'react-redux-firebase';
-import FirebaseConfig from '../Config/FirebaseConfig';
+import RNFirebase from 'react-native-firebase';
+//import FirebaseConfig from '../Config/FirebaseConfig';
 import Config from '../Config/DebugConfig';
 import createSagaMiddleware from 'redux-saga';
 import RehydrationServices from '../Services/RehydrationServices';
@@ -38,7 +39,8 @@ export default (rootReducer, rootSaga) => {
   }
 
   /* ------------- Firebase ------------- */
-  enhancers.push(reactReduxFirebase(FirebaseConfig, { userProfile: 'users' }));
+  const firebase = RNFirebase.initializeApp({ debug: __DEV__ });
+  enhancers.push(reactReduxFirebase(firebase, { userProfile: 'users', enableRedirectHandling: false }));
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron
