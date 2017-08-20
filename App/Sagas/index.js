@@ -5,11 +5,11 @@ import DebugConfig from '../Config/DebugConfig';
 
 /* ------------- Types ------------- */
 
-import { LoginTypes } from '../Redux/LoginRedux';
+//import { LoginTypes } from '../Redux/LoginRedux';
 
 /* ------------- Sagas ------------- */
 
-import { login } from './LoginSagas';
+//import { login } from './LoginSagas';
 
 /* ------------- API ------------- */
 
@@ -27,6 +27,6 @@ export default function* root() {
     // some sagas receive extra parameters in addition to an action
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
     */
-    takeLatest(LoginTypes.LOGIN_REQUEST, login),
+    //takeLatest(LoginTypes.LOGIN_REQUEST, login),
   ];
 }

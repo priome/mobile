@@ -7,7 +7,6 @@ export default () => {
   /* ------------- Assemble The Reducers ------------- */
   const rootReducer = combineReducers({
     navigation: require('./NavigationRedux').reducer,
-    login: require('./LoginRedux').reducer,
     firebase: firebaseStateReducer,
   });
 
