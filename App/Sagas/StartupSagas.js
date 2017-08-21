@@ -20,9 +20,9 @@ export function* startup(action) {
   const fire = yield getFirebase();
 
   if (fire.auth().authenticated) {
-    console.tron.log('Logged in')
+    //console.tron.log('Logged in')
   } {
-    console.tron.log('Not logged in')
+    //console.tron.log('Not logged in')
   }
 
 }

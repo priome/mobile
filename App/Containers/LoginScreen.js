@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+const FBSDK = require('react-native-fbsdk');
+const { LoginButton, AccessToken } = FBSDK;
 
 // Styles
 import styles from './Styles/LoginScreenStyle';

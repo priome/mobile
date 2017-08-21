@@ -16,7 +16,6 @@ class RootContainer extends Component {
   }
 
   render() {
-    console.tron.log(this.props);
     return (
       <View style={styles.applicationView}>
         <StatusBar barStyle="light-content" />
