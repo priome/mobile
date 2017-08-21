@@ -1,35 +1,6 @@
-import { NavigationActions } from 'react-navigation';
-import { PrimaryNav } from '../Navigation/AppNavigation';
+import AppNavigation from '../Navigation/AppNavigation'
 
-const { navigate, reset } = NavigationActions;
-const { getStateForAction } = PrimaryNav.router;
-
-const INITIAL_STATE = getStateForAction(
-  navigate({ routeName: 'LoadingScreen' }),
-);
-const NOT_LOGGED_IN_STATE = getStateForAction(
-  reset({
-    index: 0,
-    actions: [navigate({ routeName: 'NotLoggedInStack' })],
-  }),
-);
-const LOGGED_IN_STATE = getStateForAction(
-  reset({
-    index: 0,
-    actions: [navigate({ routeName: 'LoggedInStack' })],
-  }),
-);
-
-export function reducer(state = INITIAL_STATE, action) {
-  let nextState;
-  switch (action.type) {
-    case 'LOGOUT':
-      return NOT_LOGGED_IN_STATE;
-    case 'LOGIN_SUCCESS':
-      return LOGGED_IN_STATE;
-    case 'AUTO_LOGIN':
-      return LOGGED_IN_STATE;
-  }
-  nextState = getStateForAction(action, state);
-  return nextState || state;
+export const reducer = (state, action) => {
+  const newState = AppNavigation.router.getStateForAction(action, state)
+  return newState || state
 }

@@ -1,12 +1,12 @@
 import { put, select } from 'redux-saga/effects'
-import GithubActions from '../Redux/GithubRedux'
+import ThingActions from '../Redux/ThingRedux'
 import { is } from 'ramda'
 
 // exported to make available for tests
-export const selectAvatar = (state) => state.github.avatar
+export const selectThing = (state) => state.thing.data
 
 // process STARTUP actions
-export function * startup (action) {
+export function* startup(action) {
   if (__DEV__ && console.tron) {
     // straight-up string logging
     console.tron.log('Hello, I\'m an example of how to log via Reactotron.')
@@ -14,7 +14,7 @@ export function * startup (action) {
     // logging an object for better clarity
     console.tron.log({
       message: 'pass objects for better logging',
-      someGeneratorFunction: selectAvatar
+      someGeneratorFunction: selectThing
     })
 
     // fully customized!
@@ -28,13 +28,14 @@ export function * startup (action) {
         subObject,
         someInlineFunction: () => true,
         someGeneratorFunction: startup,
-        someNormalFunction: selectAvatar
+        someNormalFunction: selectThing
       }
     })
   }
-  const avatar = yield select(selectAvatar)
-  // only get if we don't have it yet
-  if (!is(String, avatar)) {
-    yield put(GithubActions.userRequest('GantMan'))
+  const thing = yield select(selectThing)
+
+  // fetch thing if not present
+  if (!is(String, thing)) {
+    yield put(ThingActions.thingRequest(123))
   }
 }
