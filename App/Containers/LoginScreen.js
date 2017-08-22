@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
-const FBSDK = require('react-native-fbsdk');
-const { LoginManager, AccessToken } = FBSDK;
+import { firebaseConnect } from 'react-redux-firebase'
+import FBSDK from 'react-native-fbsdk';
 import Button from '../Components/RoundedButton';
-
-// Styles
 import styles from './Styles/LoginScreenStyle';
 
+const { LoginManager, AccessToken } = FBSDK;
+
 class LoginScreen extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
 
   doFBlogin = () => {
+    const { firebase } = this.props;
     LoginManager.logInWithReadPermissions(['public_profile', 'email', 'user_birthday']).then(
       (result) => {
         if (result.isCancelled) {
-          alert('Login cancelled');
+          return Promise.resolve('cancelled');
         } else {
-          alert('Login success with permissions: '
-            + result.grantedPermissions.toString());
+          return AccessToken.getCurrentAccessToken();
         }
-      },
-      (error) => {
-        alert('Login fail with error: ' + error);
       }
-    );
+    ).then((data) => {
+      const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+      return firebase.auth().signInWithCredential(credential);
+    }).then((currentUser) => {
+      if (currentUser === 'cancelled') {
+        console.tron.log('Login cancelled');
+      } else {
+        console.tron.log('now signed in');
+        console.tron.log(JSON.stringify(currentUser.toJSON()));
+      }
+    }).catch((error) => {
+      console.tron.display(error);
+    });
   }
 
   render() {
@@ -48,4 +53,5 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(firebaseConnect()(LoginScreen));
+

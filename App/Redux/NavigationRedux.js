@@ -24,7 +24,9 @@ export function reducer(state = INITIAL_STATE, action) {
   let nextState
   switch (action.type) {
     case actionTypes.LOGOUT:
-      return NOT_LOGGED_IN_STATE
+      return NOT_LOGGED_IN_STATE;
+    case actionTypes.LOGIN:
+      return LOGGED_IN_STATE;
   }
   nextState = getStateForAction(action, state)
   return nextState || state
