@@ -68,7 +68,7 @@
     "reactotron-redux": "^1.11.1",
     "reactotron-redux-saga": "^1.11.1",
     "snazzy": "^7.0.0",
-    "standard": "10.0.2"
+    "standard": "^10.0.2"
   },
   "jest": {
     "testMatch": [
