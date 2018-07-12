@@ -1,12 +1,11 @@
 import { put, select } from 'redux-saga/effects'
 import ThingActions from '../Redux/ThingRedux'
 import { is } from 'ramda'
-import { getFirebase } from 'react-redux-firebase';
+import { getFirebase } from 'react-redux-firebase'
 
 export const selectThing = (state) => state.thing.data
 
-export function* startup(action) {
-
+export function * startup (action) {
   // Thing
 
   const thing = yield select(selectThing)
@@ -17,12 +16,11 @@ export function* startup(action) {
 
   // Auth
 
-  const fire = yield getFirebase();
+  const fire = yield getFirebase()
 
   if (fire.auth().authenticated) {
-    //console.tron.log('Logged in')
-  } {
-    //console.tron.log('Not logged in')
+    // console.tron.log('Logged in')
+  } else {
+    // console.tron.log('Not logged in')
   }
-
 }

@@ -1,32 +1,44 @@
-import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
-import Navigation from '../Navigation/AppNavigation';
-import { connect } from 'react-redux';
-import StartupActions from '../Redux/StartupRedux';
-import ReduxPersist from '../Config/ReduxPersist';
-import { firebaseConnect } from 'react-redux-firebase'
+import React, { Component } from 'react'
+import { View, StatusBar } from 'react-native'
+import AppNavigation from '../Navigation/AppNavigation'
+import { connect } from 'react-redux'
+import StartupActions from '../Redux/StartupRedux'
+import ReduxPersist from '../Config/ReduxPersist'
+import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import LoginScreen from './LoginScreen'
+import LoadingScreen from './LoadingScreen'
 
-import styles from './Styles/RootContainerStyles';
+import styles from './Styles/RootContainerStyles'
 
 class RootContainer extends Component {
-  componentDidMount() {
+  componentDidMount () {
     if (!ReduxPersist.active) {
-      this.props.startup();
+      this.props.startup()
     }
   }
 
-  render() {
+  render () {
+    const { auth } = this.props
+    const isLoggedIn = !isEmpty(auth)
     return (
       <View style={styles.applicationView}>
-        <StatusBar barStyle="light-content" />
-        <Navigation />
+        <StatusBar barStyle='light-content' />
+        {!isLoaded(auth) ? <LoadingScreen /> : isLoggedIn
+          ? <AppNavigation /> : <LoginScreen {...this.props} />}
       </View>
-    );
+    )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  startup: () => dispatch(StartupActions.startup()),
-});
+const mapState = ({firebase: { auth }}) => ({
+  auth
+})
 
-export default connect(null, mapDispatchToProps)(firebaseConnect()(RootContainer));
+const mapDispatchToProps = dispatch => ({
+  startup: () => dispatch(StartupActions.startup())
+})
+
+export default connect(
+  mapState,
+  mapDispatchToProps
+)(firebaseConnect()(RootContainer))

@@ -14,7 +14,7 @@ const types = R.keys(Fonts.type)
 const fontStyles = R.keys(Fonts.style)
 
 export default class ThemeScreen extends React.Component {
-  renderColor (color: string) {
+  renderColor (color) {
     return (
       <View style={styles.colorContainer} key={`${color}Container`}>
         <View style={styles.backgroundContainer} key={`${color}BackgroundContainer`}>
@@ -30,7 +30,7 @@ export default class ThemeScreen extends React.Component {
     return colors.map((color) => this.renderColor(color))
   }
 
-  renderFont (font: string) {
+  renderFont (font) {
     return (
       <Text style={[styles.fontRow, {fontFamily: Fonts.type[font]}]} key={font}>{
         `${font}: ${Fonts.type[font]}`
@@ -42,7 +42,7 @@ export default class ThemeScreen extends React.Component {
     return types.map((font) => this.renderFont(font))
   }
 
-  renderStyle (fontStyle: string) {
+  renderStyle (fontStyle) {
     return (<Text style={[styles.fontRow, {...Fonts.style[fontStyle]}]} key={fontStyle}>{`This is ${fontStyle} style`}</Text>)
   }
 

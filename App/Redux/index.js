@@ -1,15 +1,13 @@
-import { combineReducers } from 'redux';
-import { firebaseStateReducer } from 'react-redux-firebase';
-import configureStore from './CreateStore';
-import rootSaga from '../Sagas/';
+import { combineReducers } from 'redux'
+import { firebaseStateReducer } from 'react-redux-firebase'
+import configureStore from './CreateStore'
+import rootSaga from '../Sagas'
 
 export default () => {
-  /* ------------- Assemble The Reducers ------------- */
   const rootReducer = combineReducers({
-    navigation: require('./NavigationRedux').reducer,
-    thing: require('./ThingRedux').reducer,
     firebase: firebaseStateReducer,
-  });
+    thing: require('./ThingRedux').reducer
+  })
 
-  return configureStore(rootReducer, rootSaga);
-};
+  return configureStore(rootReducer, rootSaga)
+}

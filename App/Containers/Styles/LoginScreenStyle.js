@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
-import { Colors, Metrics } from '../../Themes';
+import { StyleSheet } from 'react-native'
 
-export default StyleSheet.create({});
+export default StyleSheet.create({})
