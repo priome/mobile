@@ -37,7 +37,8 @@ export default (rootReducer, rootSaga) => {
   enhancers.push(
     reactReduxFirebase(firebase.app(), {
       userProfile: 'users',
-      enableRedirectHandling: false
+      enableRedirectHandling: false,
+      useFirestoreForProfile: true
     })
   )
 
