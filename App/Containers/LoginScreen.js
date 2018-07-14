@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { ScrollView, Text } from 'react-native'
-import FBSDK from 'react-native-fbsdk'
+import { LoginManager, AccessToken } from 'react-native-fbsdk'
+import firebase from 'react-native-firebase'
 import Button from '../Components/RoundedButton'
 import styles from './Styles/LoginScreenStyle'
 
-const { LoginManager, AccessToken } = FBSDK
-
 class LoginScreen extends Component {
   doFBlogin = () => {
-    const { firebase } = this.props
     LoginManager.logInWithReadPermissions([
       'public_profile',
       'email',

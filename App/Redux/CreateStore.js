@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { autoRehydrate } from 'redux-persist'
 import { reactReduxFirebase } from 'react-redux-firebase'
-import RNFirebase from 'react-native-firebase'
+import firebase from 'react-native-firebase'
 import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import RehydrationServices from '../Services/RehydrationServices'
@@ -34,9 +34,8 @@ export default (rootReducer, rootSaga) => {
   }
 
   /* ------------- Firebase ------------- */
-  const firebase = RNFirebase.initializeApp({ debug: __DEV__ })
   enhancers.push(
-    reactReduxFirebase(firebase, {
+    reactReduxFirebase(firebase.app(), {
       userProfile: 'users',
       enableRedirectHandling: false
     })
