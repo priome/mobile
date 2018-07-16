@@ -1,25 +1,25 @@
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics, Fonts } from '../../Themes/'
+import { colors, metrics, fonts } from '../../styles/'
 
 export default StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginVertical: Metrics.section
+    marginVertical: metrics.section
   },
   contentContainer: {
     alignSelf: 'center',
     alignItems: 'center'
   },
   message: {
-    marginTop: Metrics.baseMargin,
-    marginHorizontal: Metrics.baseMargin,
+    marginTop: metrics.baseMargin,
+    marginHorizontal: metrics.baseMargin,
     textAlign: 'center',
-    fontFamily: Fonts.type.base,
-    fontSize: Fonts.size.regular,
+    fontFamily: fonts.type.base,
+    fontSize: fonts.size.regular,
     fontWeight: 'bold',
-    color: Colors.steel
+    color: colors.steel
   },
   icon: {
-    color: Colors.steel
+    color: colors.steel
   }
 })

@@ -1,6 +1,6 @@
 import 'react-native'
 import React from 'react'
-import FullButton from '../../App/Components/FullButton'
+import FullButton from '../../app/components/FullButton'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 

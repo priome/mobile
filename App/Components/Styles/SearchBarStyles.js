@@ -1,43 +1,43 @@
 import {StyleSheet} from 'react-native'
-import { Fonts, Colors, Metrics } from '../../Themes/'
+import { fonts, colors, metrics } from '../../styles/'
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Metrics.smallMargin,
-    backgroundColor: Colors.transparent,
+    marginTop: metrics.smallMargin,
+    backgroundColor: colors.transparent,
     flexDirection: 'row',
-    width: Metrics.screenWidth - Metrics.baseMargin
+    width: metrics.screenWidth - metrics.baseMargin
   },
   searchInput: {
     flex: 5,
-    height: Metrics.searchBarHeight,
+    height: metrics.searchBarHeight,
     alignSelf: 'center',
-    padding: Metrics.smallMargin,
+    padding: metrics.smallMargin,
     textAlign: 'left',
-    fontFamily: Fonts.type.base,
-    fontSize: Fonts.size.instructions,
+    fontFamily: fonts.type.base,
+    fontSize: fonts.size.instructions,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.snow,
+    borderColor: colors.snow,
     paddingLeft: 30,
-    color: Colors.snow,
+    color: colors.snow,
     flexDirection: 'row'
   },
   searchIcon: {
-    left: Metrics.doubleBaseMargin,
+    left: metrics.doubleBaseMargin,
     alignSelf: 'center',
-    color: Colors.snow,
-    backgroundColor: Colors.transparent
+    color: colors.snow,
+    backgroundColor: colors.transparent
   },
   cancelButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: Metrics.baseMargin
+    marginHorizontal: metrics.baseMargin
   },
   buttonLabel: {
-    color: Colors.snow,
-    fontFamily: Fonts.type.base,
-    fontSize: Fonts.size.regular
+    color: colors.snow,
+    fontFamily: fonts.type.base,
+    fontSize: fonts.size.regular
   }
 })

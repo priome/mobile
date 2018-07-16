@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native'
-import { Fonts, Colors } from '../../Themes/'
+import { fonts, colors } from '../../styles/'
 
 export default StyleSheet.create({
   button: {
     marginVertical: 5,
-    borderTopColor: Colors.fire,
-    borderBottomColor: Colors.bloodOrange,
+    borderTopColor: colors.fire,
+    borderBottomColor: colors.bloodOrange,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    backgroundColor: Colors.ember
+    backgroundColor: colors.ember
   },
   buttonText: {
     margin: 18,
     textAlign: 'center',
-    color: Colors.snow,
-    fontSize: Fonts.size.medium,
-    fontFamily: Fonts.type.bold
+    color: colors.snow,
+    fontSize: fonts.size.medium,
+    fontFamily: fonts.type.bold
   }
 })

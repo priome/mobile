@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView, Text } from 'react-native'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import firebase from 'react-native-firebase'
-import Button from '../Components/RoundedButton'
-import styles from './Styles/LoginScreenStyle'
+import Button from '../../components/RoundedButton'
 
 class LoginScreen extends Component {
   doFBlogin = () => {
@@ -40,7 +39,7 @@ class LoginScreen extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <Text>LoginScreen</Text>
         <Button onPress={this.doFBlogin}>FB Login</Button>
       </ScrollView>

@@ -2,13 +2,14 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { autoRehydrate } from 'redux-persist'
 import { reactReduxFirebase } from 'react-redux-firebase'
 import firebase from 'react-native-firebase'
-import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
-import RehydrationServices from '../Services/RehydrationServices'
-import ReduxPersist from '../Config/ReduxPersist'
+import Config from '../../config/DebugConfig'
+import RehydrationServices from '../../services/RehydrationServices'
+import ReduxPersist from '../../config/ReduxPersist'
+import reducers from './reducers'
+import sagas from './sagas'
 
-// creates the store
-export default (rootReducer, rootSaga) => {
+export default () => {
   /* ------------- Redux Configuration ------------- */
 
   const middleware = []
@@ -51,7 +52,7 @@ export default (rootReducer, rootSaga) => {
     ? console.tron.createStore
     : createStore
 
-  const store = createAppropriateStore(rootReducer, composeEnhancers(...enhancers))
+  const store = createAppropriateStore(reducers, composeEnhancers(...enhancers))
 
   // configure persistStore and check reducer version number
   if (ReduxPersist.active) {
@@ -59,7 +60,7 @@ export default (rootReducer, rootSaga) => {
   }
 
   // kick off root saga
-  sagaMiddleware.run(rootSaga)
+  sagaMiddleware.run(sagas)
 
   return store
 }

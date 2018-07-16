@@ -1,8 +1,8 @@
 import { StackNavigator } from 'react-navigation'
-import DashboardScreen from '../Containers/DashboardScreen'
+import Dashboard from './Dashboard'
 
 export const AppNavigator = StackNavigator({
-  DashboardScreen: { screen: DashboardScreen }
-})
+  Dashboard: { screen: Dashboard }
+}, { headerMode: 'none' })
 
 export default AppNavigator
