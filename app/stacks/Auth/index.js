@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { Text } from 'react-native-tailwind'
 import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import firebase from 'react-native-firebase'
-import Button from '../../components/RoundedButton'
+import Button from '../../components/Button'
+import Layout from '../../components/layouts/Middle'
 
 class LoginScreen extends Component {
   doFBlogin = () => {
-    LoginManager.logInWithReadPermissions([
-      'public_profile',
-      'email',
-      'user_birthday'
-    ])
+    LoginManager.logInWithReadPermissions(['public_profile', 'email'])
       .then(result => {
         if (result.isCancelled) {
           return Promise.resolve('cancelled')
@@ -39,10 +36,10 @@ class LoginScreen extends Component {
 
   render () {
     return (
-      <ScrollView>
-        <Text>LoginScreen</Text>
-        <Button onPress={this.doFBlogin}>FB Login</Button>
-      </ScrollView>
+      <Layout>
+        <Text className='text-white mb-4'>Priome</Text>
+        <Button onPress={this.doFBlogin}>Login with Facebook</Button>
+      </Layout>
     )
   }
 }

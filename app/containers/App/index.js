@@ -12,27 +12,28 @@ import '../../lib/consolePuts'
 const store = createStore()
 
 class App extends Component {
-  componentDidMount () {
+  componentDidMount() {
     if (!ReduxPersist.active) {
       this.props.startup()
     }
   }
-
-  render () {
-    const { auth } = this.props
+  render() {
+    const { auth, profile } = this.props
     const isLoggedIn = !isEmpty(auth)
     if (!isLoaded(auth)) return <LoadingScreen />
     if (!isLoggedIn) return <Auth />
+
     return <MainStack />
   }
 }
 
-const mapState = ({firebase: { auth }}) => ({
-  auth
+const mapState = ({ firebase }) => ({
+  auth: firebase.auth,
+  profile: firebase.profile
 })
 
 const mapDispatchToProps = dispatch => ({
-  startup: () => dispatch({type: 'STARTUP'})
+  startup: () => dispatch({ type: 'STARTUP' })
 })
 
 const AppContainer = connect(
@@ -41,7 +42,7 @@ const AppContainer = connect(
 )(firebaseConnect()(App))
 
 class AppWithStore extends Component {
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <AppContainer />

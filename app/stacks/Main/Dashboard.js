@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native-tailwind'
 import { firebaseConnect } from 'react-redux-firebase'
-import Button from '../../components/RoundedButton'
+import { connect } from 'react-redux'
+import Button from '../../components/Button'
+import Layout from '../../components/layouts/Middle'
 
 class Dashboard extends Component {
   logout = () => {
@@ -12,13 +14,19 @@ class Dashboard extends Component {
   }
   render () {
     return (
-      <View>
-        <Text>Dashboard</Text>
-        <Button onPress={this.logout}>Logout</Button>
-        <Button onPress={this.updateProfile}>Update</Button>
-      </View>
+      <Layout>
+        <View>
+          <Text>Dashboard</Text>
+          <Button onPress={this.logout}>Logout</Button>
+          <Button onPress={this.updateProfile}>Update</Button>
+        </View>
+      </Layout>
     )
   }
 }
 
-export default firebaseConnect()(Dashboard)
+const mapState = state => ({
+  profile: state.firebase.profile
+})
+
+export default connect(mapState)(firebaseConnect()(Dashboard))
