@@ -4,7 +4,8 @@ import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import ReduxPersist from '../../config/ReduxPersist'
 import createStore from './createStore'
 import Auth from '../../stacks/Auth'
-import MainStack from '../../stacks/Main'
+import Main from '../../stacks/Main'
+import Onboarding from '../../stacks/Onboarding'
 import LoadingScreen from '../../components/LoadingScreen'
 import '../../config'
 import '../../lib/consolePuts'
@@ -12,18 +13,22 @@ import '../../lib/consolePuts'
 const store = createStore()
 
 class App extends Component {
-  componentDidMount() {
+  componentDidMount () {
     if (!ReduxPersist.active) {
       this.props.startup()
     }
   }
-  render() {
-    const { auth, profile } = this.props
+  profileIsComplete = () => {
+    const { profile } = this.props
+    return !!profile.birthDate
+  }
+  render () {
+    const { auth } = this.props
     const isLoggedIn = !isEmpty(auth)
     if (!isLoaded(auth)) return <LoadingScreen />
     if (!isLoggedIn) return <Auth />
-
-    return <MainStack />
+    if (!this.profileIsComplete()) return <Onboarding />
+    return <Main />
   }
 }
 
@@ -36,13 +41,12 @@ const mapDispatchToProps = dispatch => ({
   startup: () => dispatch({ type: 'STARTUP' })
 })
 
-const AppContainer = connect(
-  mapState,
-  mapDispatchToProps
-)(firebaseConnect()(App))
+const AppContainer = connect(mapState, mapDispatchToProps)(
+  firebaseConnect()(App)
+)
 
 class AppWithStore extends Component {
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <AppContainer />

@@ -10,15 +10,14 @@ class Dashboard extends Component {
     this.props.firebase.logout()
   }
   updateProfile = () => {
-    this.props.firebase.updateProfile({ level: 1 })
+    this.props.firebase.updateProfile({ level: 1 }).then(r => console.put(r))
   }
   render () {
     return (
       <Layout>
         <View>
-          <Text>Dashboard</Text>
+          <Text className='text-white mb-4'>Dashboard</Text>
           <Button onPress={this.logout}>Logout</Button>
-          <Button onPress={this.updateProfile}>Update</Button>
         </View>
       </Layout>
     )

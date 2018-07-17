@@ -14,13 +14,7 @@ export default class Button extends Component {
   static propTypes = {
     onPress: PropTypes.func,
     text: PropTypes.string,
-    children: PropTypes.string,
-    navigator: PropTypes.object
-  }
-
-  getText () {
-    const buttonText = this.props.text || this.props.children || ''
-    return buttonText.toUpperCase()
+    children: PropTypes.string
   }
 
   render () {
@@ -29,7 +23,9 @@ export default class Button extends Component {
         className='bg-blue p-3 rounded-sm w-auto'
         onPress={this.props.onPress}
       >
-        <Text className='text-white'>{this.getText()}</Text>
+        <Text className='text-white'>
+          {this.props.children || this.props.text}
+        </Text>
       </TouchableOpacity>
     )
   }
