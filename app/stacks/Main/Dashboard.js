@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native-tailwind'
 import { firebaseConnect } from 'react-redux-firebase'
 import { connect } from 'react-redux'
+import Title from '../../components/Title'
 import Button from '../../components/Button'
 import Layout from '../../components/layouts/Middle'
 
@@ -16,7 +17,8 @@ class Dashboard extends Component {
     return (
       <Layout>
         <View>
-          <Text className='text-white mb-4'>Dashboard</Text>
+          <Title>Dashboard</Title>
+          <Text className='text-white'>{`Your birth date is ${this.props.profile.birthDate}`}</Text>
           <Button onPress={this.logout}>Logout</Button>
         </View>
       </Layout>

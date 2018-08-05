@@ -1,12 +1,20 @@
 import React from 'react'
+import { firebaseConnect } from 'react-redux-firebase'
 import { View, Text } from 'react-native-tailwind'
 import { DatePicker } from 'native-base'
 import Button from '../../components/Button'
 import Layout from '../../components/layouts/Middle'
 
 class Screen2 extends React.Component {
-  setDate = val => {
-    console.log(val)
+  state = { birthDate: null }
+  setDate = birthDate => {
+    this.setState({ birthDate })
+  }
+  proceed = () => {
+    const { props: { firebase, navigation }, state: { birthDate } } = this
+    firebase.updateProfile({ birthDate }).then(() => {
+      navigation.navigate('Screen2')
+    })
   }
   render () {
     return (
@@ -14,25 +22,25 @@ class Screen2 extends React.Component {
         <View className='items-center'>
           <Text className='text-white mb-4'>What's your birth date?</Text>
           <DatePicker
-            defaultDate={new Date(2018, 4, 4)}
-            minimumDate={new Date(2018, 1, 1)}
-            maximumDate={new Date(2018, 12, 31)}
-            locale={'en'}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
-            animationType={'fade'}
+            defaultDate={new Date(2000, 1, 1)}
+            minimumDate={new Date(1920, 1, 1)}
+            maximumDate={new Date(2014, 12, 31)}
+            locale='en'
             placeHolderText='Select date'
-            textStyle={{ color: 'green' }}
-            placeHolderTextStyle={{ color: '#d3d3d3' }}
+            textStyle={{ color: 'aqua' }}
+            placeHolderTextStyle={{ color: '#FFF' }}
             onDateChange={this.setDate}
+            mode='date'
+            androidMode='spinner'
           />
-          <Button onPress={() => this.props.navigation.navigate('Screen2')}>
-            Next
-          </Button>
+          {this.state.birthDate &&
+            <Button onPress={this.proceed}>
+              Next
+            </Button>}
         </View>
       </Layout>
     )
   }
 }
 
-export default Screen2
+export default firebaseConnect()(Screen2)
